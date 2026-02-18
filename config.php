@@ -1,18 +1,20 @@
 <?php
 
-/* Database Configuration (Render PostgreSQL) */
+/* =========================
+   Database Configuration
+   ========================= */
 
-$DB_HOST = getenv('DB_HOST');
-$DB_PORT = getenv('DB_PORT') ?: '5432';
-$DB_NAME = getenv('DB_NAME');
-$DB_USER = getenv('DB_USER');
-$DB_PASS = getenv('DB_PASS');
+$DATABASE_URL = getenv('DATABASE_URL');
+
+if (!$DATABASE_URL) {
+    die("DATABASE_URL not set");
+}
 
 try {
     $conn = new PDO(
-        "pgsql:host=$DB_HOST;port=$DB_PORT;dbname=$DB_NAME",
-        $DB_USER,
-        $DB_PASS,
+        $DATABASE_URL,
+        null,
+        null,
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
@@ -22,8 +24,10 @@ try {
     die("DB Connection Failed");
 }
 
-/* System Configuration */
+/* =========================
+   System Configuration
+   ========================= */
 
-define('API_KEY', 'my-secret-key');
-define('ADMIN_USER', 'admin');
-define('ADMIN_PASS', 'password');   // Change for production
+define('API_KEY', 'my-secret-key');     // Change in production
+define('ADMIN_USER', 'admin');          // Change in production
+define('ADMIN_PASS', 'password');       // Change in production
