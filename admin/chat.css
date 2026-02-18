@@ -1,0 +1,15 @@
+.chat {
+  max-width: 600px;
+  margin: auto;
+}
+.admin {
+  background: #dcf8c6;
+  padding: 8px;
+  margin: 5px;
+  text-align: right;
+}
+.device {
+  background: #eee;
+  padding: 8px;
+  margin: 5px;
+}

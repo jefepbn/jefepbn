@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+
+  web:
+    build: .
+    ports:
+      - "8090:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      DB_HOST: db
+      DB_NAME: devices
+      DB_USER: root
+      DB_PASS: root
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devices
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
